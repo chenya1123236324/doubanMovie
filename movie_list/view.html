@@ -1,0 +1,67 @@
+<h1 class="page-header">{{title}}</h1>
+<h3 ng-if="message">{{message}}</h3>
+<div class="list-group">
+    <a  ng-repeat="item in subjects" href="#/detail/{{item.id}}" class="list-group-item">
+        <span class="badge">{{item.rating.average}}</span>
+        <div class="media">
+            <div class="media-left">
+                    <img class="media-object" ng-src="{{item.images.medium}}" alt="{{item.title}}" width="130" height="180">
+            </div>
+            <div class="media-body">
+                <h3 class="media-heading">{{item.title}}</h3>
+                <p>
+                    类型：<span>{{item.genres.join('、')}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                <p>
+
+                <p>
+                  上映年份：<span>{{item.year}}</span></p>
+                <p>
+                <p>
+                    导演:<span ng-repeat="directors in  item.directors">
+                         {{directors.name}}{{$last?'':'、'}}
+                         </span>
+                </p>
+                <p>类型:<span>{{item.genres.join("、")}}</span></p>
+                <p>
+                    主演：<span ng-repeat="c in item.casts">
+	        	          {{c.name}}{{$last?'':'、'}}
+                          </span>
+                </p>
+            </div>
+        </div>
+    </a>
+</div>
+
+<p ng-show="!loading">
+    总共:{{totalCount}}条记录,第{{currentPage}}页,共{{totalPages}}页
+</p>
+<!--翻页-->
+<nav  ng-show="!loading">
+    <ul class="pager">
+        <li ng-class="{disabled:currentPage<=1}"><a  ng-click="go(currentPage-1)">上一页</a></li>
+        <li ng-class="{disabled:currentPage>=totalPages}"><a  ng-click="go(currentPage+1)">下一页</a></li>
+    </ul>
+</nav>
+<!--遮罩层-->
+<div class="mask" ng-show="loading">
+    <div class="spinner">
+        <div class="spinner-container container1">
+            <div class="circle1"></div>
+            <div class="circle2"></div>
+            <div class="circle3"></div>
+            <div class="circle4"></div>
+        </div>
+        <div class="spinner-container container2">
+            <div class="circle1"></div>
+            <div class="circle2"></div>
+            <div class="circle3"></div>
+            <div class="circle4"></div>
+        </div>
+        <div class="spinner-container container3">
+            <div class="circle1"></div>
+            <div class="circle2"></div>
+            <div class="circle3"></div>
+            <div class="circle4"></div>
+        </div>
+    </div>
+</div>
